@@ -6,4 +6,4 @@ data_send = {"text": "hello world"}
 
 #send data to brain:
 package = {"type": "t2s", "data": json.dumps(data_send), "source": "", "protocol": ""}
-send_json(json.dumps(package))
+send_json.send_zmq(json.dumps(package))

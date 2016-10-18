@@ -8,4 +8,4 @@ data_send = {"action": ANIMATION_ACTIONS.SMILE, "value": ""}
 
 #send data to brain:
 package = {"type": "animation", "data": json.dumps(data_send), "source": "", "protocol": ""}
-send_json(json.dumps(package))
+send_json.send_zmq(json.dumps(package))
