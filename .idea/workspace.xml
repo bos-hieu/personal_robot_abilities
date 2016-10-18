@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d6a232c9-417f-4fa4-9bbc-e3dc5d80bd77" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/demo_ability/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/personal_robot_abilities.iml" afterPath="$PROJECT_DIR$/.idea/personal_robot_abilities.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/demo_ability/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo_ability/happy_animation.py" afterPath="$PROJECT_DIR$/demo_ability/happy_animation.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo_ability/hello_world.py" afterPath="$PROJECT_DIR$/demo_ability/hello_world.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo_ability/show_card.py" afterPath="$PROJECT_DIR$/demo_ability/show_card.py" />
     </list>
     <ignored path="personal_robot_abilities.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -63,11 +58,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/demo_ability/README.md">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
-              <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+              <caret line="2" column="26" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/demo_ability/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -143,6 +148,7 @@
         <option value="$PROJECT_DIR$/demo_ability/test_zmq.py" />
         <option value="$PROJECT_DIR$/demo_ability/show_card.py" />
         <option value="$PROJECT_DIR$/demo_ability/README.md" />
+        <option value="$PROJECT_DIR$/demo_ability/.gitignore" />
       </list>
     </option>
   </component>
@@ -232,7 +238,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
@@ -643,7 +649,15 @@
     <entry file="file://$PROJECT_DIR$/demo_ability/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+          <caret line="2" column="26" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo_ability/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
           <folding />
         </state>
       </provider>

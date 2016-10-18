@@ -1,0 +1,9 @@
+#ingore compiled python
+**/*.pyc
+
+#ignore file editing
+**/*.*~
+
+#ignore Python virtualenv
+venv/
+venv
