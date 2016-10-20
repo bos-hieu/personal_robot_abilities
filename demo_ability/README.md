@@ -8,9 +8,13 @@ Package
 
 Planing for abilities
 ---------------------
-- Made idea
-- Test idea
-- Coding
+- Idea: Slack
+    + Nhắc nhở đăng một daily scrum.
+    + Thông báo khi có message mới
+    + Đăng một message
+    + Gọi điện thông qua slack
+- Tested idea: ok
+- Coding: In progess
 - Testing on robot
 
 Testing on robot
