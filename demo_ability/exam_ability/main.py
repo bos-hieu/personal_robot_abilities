@@ -1,10 +1,11 @@
 import json
 import argparse
 
-from demo_ability.sdk.send_json import send_zmq
-from demo_ability.sdk.actions import ANIMATION_ACTIONS
 
 #data_send = {"action": ANIMATION_ACTIONS.SMILE, "value": ""}
+from demo_ability.sdk.actions import ANIMATION_ACTIONS
+from demo_ability.sdk.send_json import send_zmq
+
 
 def output(action):
   data = {"action":action, "value": ""}

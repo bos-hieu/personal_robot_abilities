@@ -2,15 +2,16 @@ Personal Robot Abilities
 ========================
 Detail about all abilities for Personal Robot. Using python to code
 
-Package
--------
-- Zmq: [ref:](https://learning-0mq-with-pyzmq.readthedocs.io/en/latest/pyzmq/pyzmq.html)
+Reference
+---------
+- [Zmq](https://learning-0mq-with-pyzmq.readthedocs.io/en/latest/pyzmq/pyzmq.html)
+- [Slack api](https://api.slack.com/community)
 
 Planing for abilities
 ---------------------
 - Idea: Slack
+    + Thông báo khi có message mới (Push Notifications): use [event](https://api.slack.com/events/api)
     + Nhắc nhở đăng một daily scrum.
-    + Thông báo khi có message mới
     + Đăng một message
     + Gọi điện thông qua slack
 - Tested idea: ok
