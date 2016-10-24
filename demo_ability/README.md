@@ -6,6 +6,7 @@ Reference
 ---------
 - [Zmq](https://learning-0mq-with-pyzmq.readthedocs.io/en/latest/pyzmq/pyzmq.html)
 - [Slack api](https://api.slack.com/community)
+- [Method for slack api](https://api.slack.com/methods)
 
 Planing for abilities
 ---------------------

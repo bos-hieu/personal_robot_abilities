@@ -10,5 +10,5 @@ local_image_path = ""
 data = {"action": "SHOW_CARD", "value": (title, description, local_image_path)}
 
 #send data to brain:
-package = {"type": "t2s", "data": json.dumps(data), "source": "", "protocol": ""}
+package = {"type": "animation", "data": json.dumps(data), "source": "", "protocol": ""}
 send_json.send_zmq(json.dumps(package))
