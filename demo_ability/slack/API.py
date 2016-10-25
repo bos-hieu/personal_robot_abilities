@@ -54,8 +54,30 @@ def is_member(username):
     print 'Find user error: %s' % e
 
 
-def get_channels_of_user(username):
-  pass
+#Get all groups of this user (private channel)
+def get_user_groups():
+  api_call = slack_client.api_call('groups.list')
+  if api_call['ok']:
+    return api_call['groups']
+
+
+#Get all channel of this user (public channel)
+def get_user_channels():
+  try:
+    #List to store all channels of this user
+    user_channels = []
+
+    #Get all public channels of this user
+    api_call = slack_client.api_call('channels.list')
+    if api_call['ok']:
+      channels = api_call['channels']
+      for channel in channels:
+        if channel['is_member']:
+          user_channels.append(channel)
+      print len(user_channels)
+
+  except Exception, e:
+    print 'Get channels error: %s' % e
 
 
 def get_channel_name(channel_id):
@@ -79,12 +101,12 @@ def parse_slack_output(slack_rtm_output):
   return None, None, None
 
 
-def output(action):
-  data = {"action":action, "value": ""}
+def output(title, message):
+  data = {"action":"Push Notifications Slack", "value": (title, message)}
   package = {"source": "", "data": json.dumps(data), "type": "t2s", "protocol": ""}
   send_zmq(json.dumps(package))
 
-
+#TODO: write function to get code auth and access token
 if __name__ == '__main__':
   # print get_user_info(BOT_ID)
   # print get_user_id("hieu-bot")
@@ -94,12 +116,24 @@ if __name__ == '__main__':
   # print is_member('hieu-bt')
   #print get_channel_name('D2S9PV1K4')
   # print slack_client.api_call('groups.info', channel='G2T4D9R28')
+  # api_call = slack_client.api_call('auth.test')
+  # print api_call
+  # api_call =slack_client.api_call('oauth.access', client_id = client_id, client_secret=client_secret, code=code)
+  # api_call =slack_client.api_call('channels.list')
+  # print api_call
+  # if api_call['ok']:
+  #   reminders = api_call['reminders']
+  #   for reminder in reminders:
+  #     slack_client.api_call('reminders.delete', reminder=reminder['id'])
+  # print api_call
 
-  this_user_id =''
+  """this_user_id =''
   api_call = slack_client.api_call('auth.test')
   print api_call
   if api_call['ok']:
     this_user_id = api_call['user_id']
+
+  slack_client.api_call('reminders.add', text='For testing reminders', time=10)
 
 
   READ_WEBSOCKET_DELAY = 1  # 1 second delay between reading from firehose
@@ -108,7 +142,7 @@ if __name__ == '__main__':
     while True:
       message, channel_id, user_id = parse_slack_output(slack_client.rtm_read())
 
-      #Get channel_name, username from channel_id, user_id
+      # Get channel_name, username from channel_id, user_id
       channel_name = get_channel_name(channel_id)
       username = get_username(user_id)
 
@@ -118,24 +152,12 @@ if __name__ == '__main__':
         else:
           title = 'New message from user %s' % username
 
-        data = {"action": "new message", "value": (title, message)}
-        package = {"type": "t2s", "data": json.dumps(data), "source": "", "protocol": ""}
-        send_zmq(json.dumps(package))
-        print package
-        #if channel_id:
-         #slack_client.rtm_send_message(channel=channel_id, message='Reply: ' + message)
+        output(title, message)
+      #   if channel_id:
+      #    slack_client.rtm_send_message(channel=channel_id, message='Reply: ' + message)
       time.sleep(READ_WEBSOCKET_DELAY)
   else:
-    print("Connection failed. Invalid Slack token or bot ID?")
+    print("Connection failed. Invalid Slack token or bot ID?")"""
 
-  #slack_client.api_call('reminders.add', text='For testing reminders', time=10)
-  #api_call = slack_client.api_call('auth.test')
-  # print api_call
-  #api_call =slack_client.api_call('oauth.access', client_id = client_id, client_secret=client_secret, code=code)
-  #api_call =slack_client.api_call('channels.list')
-  #print api_call
-  # if api_call['ok']:
-  #   reminders = api_call['reminders']
-  #   for reminder in reminders:
-  #     slack_client.api_call('reminders.delete', reminder=reminder['id'])
-  # print api_call
+  get_user_channels()
+  print get_user_groups()
