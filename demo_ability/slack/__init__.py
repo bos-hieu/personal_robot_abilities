@@ -6,3 +6,7 @@
 # token: xoxp-4905231067-93860464293-93805900307-96bc401331d824a87395e3369f8970d1
 #
 """
+
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))

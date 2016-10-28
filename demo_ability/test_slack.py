@@ -1,9 +1,8 @@
+import argparse
 import json
 import time
 from slackclient import SlackClient
-#from ..sdk.send_json import send_zmq
-
-from demo_ability.sdk.send_json import send_zmq
+from sdk.send_json import send_zmq
 
 SLACK_BOT_TOKEN = 'xoxb-94318686709-NHZpp8Zhd7NzPEfIw87AqlU5'
 BOT_NAME = 'hieu-bot'
@@ -27,7 +26,7 @@ code = '96839134117.96870773271.119aa669ce'
 SLACK_TOKEN = 'xoxp-96839134117-96781460755-96808999827-03dd8f5adeeee32367eeaa036bf834e4'
 SLACK_WEBHOOK_SECRET = 'p6aMVuJpV7TUSXBQYxqPjesE'
 
-
+#TODO: Add error handling
 class MySlackClient(SlackClient):
   def __init__(self, token):
     super(MySlackClient, self).__init__(token)
@@ -171,16 +170,16 @@ def output(title, message):
 
 #TODO: write function to get code auth and access token
 if __name__ == '__main__':
+  parser = argparse.ArgumentParser()
+
+  parser.add_argument('-d', '-data', help='data', required=True)
+  parser.add_argument('-a', '-action', help='action', required=True)
+  parser.add_argument('-p', '-protocol', help='protocol')
+
+  args = parser.parse_args()
+  message = args.d
 
   slack_api = MySlackClient(SLACK_TOKEN)
-  slack_api.push_notifications()
-
-  #pass
-  #url='https://testingslackapigroup.slack.com/oauth/authorize?client_id='+client_id+"&scope=read,client&team=T2U9RRCDQ"
-  #print url
-  #print slack_api.api_call('auth.test')
-  #slack_token = SlackAPI(client_id, client_secret, redirect_uri)
-  #acccess_token = slack_token.get_access_token(code)
-  #print acccess_token
-  #api_call = slack_client.api_call('oauth.access', client_id=client_id, client_secret=client_secret, code=code)
-  #print api_call
+  #slack_api.push_notifications()
+  slack_api.remider_add(text=message, time='in 5 minutes')
+  print args
