@@ -1,7 +1,7 @@
 import argparse
 import json
 import time
-from slackclient import SlackClient
+from slackclient import SlackClient as BaseSlackClient
 from sdk.send_json import send_zmq
 
 SLACK_BOT_TOKEN = 'xoxb-94318686709-NHZpp8Zhd7NzPEfIw87AqlU5'
@@ -20,28 +20,54 @@ client_secret = '15e6151e1c321aa36927cc17f14d4bba'
 redirect_uri= 'https://slack.com/oauth/authorize?complete'
 code = '96839134117.96870773271.119aa669ce'
 
-#SLACK_TOKEN = 'xoxp-4905231067-93860464293-93805900307-96bc401331d824a87395e3369f8970d1'
+# SLACK_TOKEN = 'xoxp-4905231067-93860464293-93805900307-96bc401331d824a87395e3369f8970d1'
 #SLACK_TOKEN = 'xoxp-4905231067-93860464293-95244030978-0ebd6a3ca5c24cf7e3a45deb5c9cf740'
 #SLACK_TOKEN = 'xoxp-96331862466-96316368960-96863481522-1f3059a8daaae6c604bda19a5363dd6f'
 SLACK_TOKEN = 'xoxp-96839134117-96781460755-96808999827-03dd8f5adeeee32367eeaa036bf834e4'
 SLACK_WEBHOOK_SECRET = 'p6aMVuJpV7TUSXBQYxqPjesE'
 
 #TODO: Add error handling
-class MySlackClient(SlackClient):
+class SlackClientError(Exception):
+  def __init__(self, message):
+    self.message = message
+
+    super(SlackClientError, self).__init__(self.message)
+
+
+class SlackClient(BaseSlackClient):
   def __init__(self, token):
-    super(MySlackClient, self).__init__(token)
+    super(SlackClient, self).__init__(token)
+
+  def get_result_api_call(self, method, *args,**kwargs):
+    result = self.api_call(method, **kwargs)
+    if result['ok']:
+      try:
+        return result[args[0]]
+      except Exception, e:
+        raise SlackClientError("Don't have this attribute")
+    elif result['error'] is not None:
+      raise SlackClientError(result['error'])
+    else:
+      raise SlackClientError("An unknown error occur")
 
   def get_user_info(self, user_id):
-    api_call = self.api_call('users.info', user=user_id)
-    if api_call['ok']:
-      return api_call['user']
-    return None
+    # api_call = self.api_call('users.info', user=user_id)
+    # if api_call['ok']:
+    #   return api_call['user']
+    # elif api_call['error'] is not None:
+    #   raise SlackClientError(api_call['error'])
+    # else:
+    #   raise SlackClientError('An unknown error occur')
+    return self.get_result_api_call('users.info', 'user', user=user_id)
 
   def get_username(self, user_id):
-    user_info = self.get_user_info(user_id)
-    if user_info:
-      return user_info['name']
-    return None
+    try:
+      user_info = self.get_user_info(user_id)
+      if user_info:
+        return user_info['name']
+    except Exception, e:
+      raise SlackClientError(e)
+
 
   def get_user_id(self, username):
     #return slacker.users.get_user_id(username)
@@ -65,6 +91,8 @@ class MySlackClient(SlackClient):
     api_call = self.api_call('groups.list')
     if api_call['ok']:
       return api_call['groups']
+    elif api_call['error'] is not None:
+      pass
 
   #Get all channel of this user (public channel)
   def get_user_channels(self):
@@ -118,7 +146,7 @@ class MySlackClient(SlackClient):
     return this_user_id
 
   def get_notification(self):
-    message, channel_id, user_id = MySlackClient.parse_slack_output(self.rtm_read())
+    message, channel_id, user_id = SlackClient.parse_slack_output(self.rtm_read())
 
     # Get channel_name, username from channel_id, user_id
     channel_name = self.get_channel_name(channel_id)
@@ -170,16 +198,19 @@ def output(title, message):
 
 #TODO: write function to get code auth and access token
 if __name__ == '__main__':
-  parser = argparse.ArgumentParser()
+  # parser = argparse.ArgumentParser()
+  #
+  # parser.add_argument('-d', '-data', help='data', required=True)
+  # parser.add_argument('-a', '-action', help='action', required=True)
+  # parser.add_argument('-p', '-protocol', help='protocol')
+  #
+  # args = parser.parse_args()
+  # message = args.d
 
-  parser.add_argument('-d', '-data', help='data', required=True)
-  parser.add_argument('-a', '-action', help='action', required=True)
-  parser.add_argument('-p', '-protocol', help='protocol')
+  slack_api = SlackClient(SLACK_TOKEN)
+  slack_api.get_user_groups()
 
-  args = parser.parse_args()
-  message = args.d
-
-  slack_api = MySlackClient(SLACK_TOKEN)
-  #slack_api.push_notifications()
-  slack_api.remider_add(text=message, time='in 5 minutes')
-  print args
+  slack_api.get_notification()
+  # slack_api.push_notifications()
+  # slack_api.remider_add(text=message, time='in 5 minutes')
+  # print args
